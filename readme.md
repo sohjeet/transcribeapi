@@ -1,3 +1,7 @@
+# Audio Transcribe Project
+
+This project is an audio transcription service. Users upload an audio file and receive a text file of the transcription via email. The email used for this service is the one provided by the user during registration.
+
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
@@ -125,10 +129,11 @@ uvicorn main:app --reload
 ```
 
 This will start the server at `http://localhost:8000`.
+# User Management
 
-# manage.py
+Admins can create, delete, and update users. Users can view their own responses or previous responses via the API. 
 
-The `manage.py` file is a command-line utility that lets you interact with your FastAPI project in various ways. It uses the `click` library to create command-line interfaces.
+Admins use the `manage.py` script to create an admin account and update the admin password and email. 
 
 ## Usage
 
@@ -164,6 +169,13 @@ python manage.py change-admin-email
 
 The `manage.py` file includes custom validation for the email and password inputs. The email must be a valid email address, and the password must be at least 7 characters long. If you enter an invalid email or password, you will see an error message and be prompted to try again.
 
+### Future Updates
+
+In future updates, an admin can be made a superuser. A superuser can perform the same tasks as an admin but cannot perform any tasks on admin profiles.
+
+#### Admin Panel
+
+    The admin panel UI is managed by SQLAdmin.
 
 # Testing
 
