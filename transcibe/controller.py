@@ -41,7 +41,7 @@ async def audio_conversion(
 
     # This reads the content of the audio file and transcribes it.
     audio_content = await audio_file.read()
-    video_length, final_content = transcribe_content(audio_content)
+    video_length, final_content = await transcribe_content(audio_content)
 
     # This creates a new AudioConversion object with the transcribed content and the current user's id.
     response = AudioConversion(text_content=final_content, user_id=current_user.id)

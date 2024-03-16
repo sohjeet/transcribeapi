@@ -1,7 +1,7 @@
 import click
 from app.db import models
 from app.db.database import SessionLocal
-from users import create_hashed_password                       
+from users import auth_service                       
 from email_validator import validate_email, EmailNotValidError
 
 def is_valid_email(ctx, param, value):
@@ -52,7 +52,7 @@ def create_admin(email, username, password):
     if is_admin_exists(username) or is_email_exists(email):
         echo_failure(f"Admin '{username}' already exists. Please use a different username or email.")
         return
-    hashed_password = create_hashed_password(plaintext_password=password)
+    hashed_password = auth_service.create_hashed_password(plaintext_password=password)
     update_password = hashed_password
       
     # Create a new super admin
@@ -60,6 +60,7 @@ def create_admin(email, username, password):
         email=email,
         username=username,
         password=update_password,
+        current_credit=10000,
         is_admin=True,
         is_superuser=True,
     )
@@ -78,7 +79,7 @@ def change_admin_password(username, new_password):
         admin = is_admin_exists(username)
         if admin:
             # Update the admin's password
-            admin.password =  create_hashed_password(plaintext_password=new_password)
+            admin.password =  auth_service.create_hashed_password(plaintext_password=new_password)
             try:
                 db.commit()
                 echo_success(f"Password for admin '{username}' changed successfully.")
