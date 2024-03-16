@@ -41,7 +41,7 @@
 					}
 				},
 				"python.formatting.provider": "autopep8",
-				"sqltools.connections": 
+				"sqltools.connections": [
 					{
 						"name": "Local database",
 						"driver": "PostgreSQL",
@@ -50,9 +50,20 @@
 						"database": "postgres",
 						"username": "admin",
 						"password": "LocalPassword"
+					},
+					{
+						"name": "Azure database",
+						"driver": "PostgreSQL",
+						"server": "<HOSTNAME>.postgres.database.azure.com",
+						"port": 5432,
+						"database": "postgres",
+						"username": "<USERNAME>",
+						"askForPassword": true,
+						"pgOptions": {
+							"ssl": true
+						}
 					}
-      }
-				,
+				],
 				"files.exclude": {
 					".ruff_cache": true,
 					".pytest_cache": true
